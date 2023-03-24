@@ -1,0 +1,26 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: authorization-service
+  main:
+    allow-circular-references: true
+keycloak:
+#    keycloak.realm=<realm-name>
+#    keycloak.auth-server-url=<keycloak-server-url>
+#    keycloak.ssl-required=external
+#    keycloak.resource=<client-id>
+#    keycloak.credentials.secret=<client-secret>
+#    keycloak.securityConstraints[0].authRoles[0]=<role>
+#    keycloak.securityConstraints[0].securityCollections[0].patterns[0]=/<protected-path>/*
+
+  config:
+    import: properties.properties
+  realm: my_realm
+  auth-server-url: http://localhost:8484/auth
+  ssl-required: external
+  resource: my_client
+  credentials:
+    secret: secret
+

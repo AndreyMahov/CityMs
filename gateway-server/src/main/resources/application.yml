@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: citizens-service
+          uri: ${citizens-service}
+          predicates:
+            - Path=/api/v1/citizen-service/**
+        - id: cars-service
+          uri: ${cars-service}
+          predicates:
+            - Path=/api/v1/car-service/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+
+        - id: houses-service
+          uri: ${houses-service}
+          predicates:
+            - Path=/api/v1/houses-service/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+
+        - id: passports-service
+          uri: ${passports-service}
+          predicates:
+            - Path=/api/v1/passports-service/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            provider: keycloak
+            client-id: my_client
+            client-secret: lpRLSht7RBwm2OKEZQj8H0GUMWvAoR8Z
+            authorization-grant-type: authorization_code
+            redirect-uri: ${keycloak-client.server-url}/login/oauth2/code/keycloak
+            scope: openid
+        provider:
+          keycloak:
+            authorization-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/auth
+            token-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/token
+            user-info-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/userinfo
+            jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+            user-name-attribute: name
+            user-info-authentication-method: header
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+#  keycloak-client:
+#    server-url: https://localhost:8484/auth
+#    realm: my_realm
+  config:
+    import: properties.properties

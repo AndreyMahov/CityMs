@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_tables
+      author: Andrey Mahov
+      changes:
+        - createTable:
+            tableName: continuous_log
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: model_name
+                  type: VARCHAR(100)
+              - column:
+                  name: count
+                  type: INTEGER
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP
+
+        - createTable:
+            tableName: log_by_timer
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: model_name
+                  type: VARCHAR(100)
+              - column:
+                  name: count
+                  type: INTEGER
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP
+
+
+
+
+

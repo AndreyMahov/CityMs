@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      id: '1'
+      author: 'Andrey Makhov'
+      context: create_tables_passport_server
+      file: db/changelog/version/1/create_tables.yml
+

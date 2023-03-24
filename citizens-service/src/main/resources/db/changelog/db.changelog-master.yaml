@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      id: '1_cityServer'
+      author: 'Andrey Makhov'
+      context: create_tables_cityServer
+      file: db/changelog/changeset/version/1/31.01.23/create_tables.sql
+  - include:
+      id: '2_cityServer'
+      author: 'Andrey Makhov'
+      context: create_tables_cityServer
+      file: db/changelog/changeset/version/1/31.01.23/insert_data.sql

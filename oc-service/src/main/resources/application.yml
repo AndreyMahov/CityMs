@@ -1,0 +1,49 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: oc-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/oc
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+    show-sql: true
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yaml
+    enabled: true
+  kafka:
+    consumer:
+      group-id: oc_group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      bootstrap-servers: localhost:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      bootstrap-servers: localhost:29092
+    bootstrap-servers: localhost:29092
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /passports/swagger-ui.html
+
+
+

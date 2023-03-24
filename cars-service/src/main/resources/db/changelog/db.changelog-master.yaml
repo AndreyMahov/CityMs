@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      id: '1'
+      author: 'Andrey Makhov'
+      context: create_tables
+      file: db/changelog/changeset/version/1/31.01.23/create_tables.sql
+  - include:
+      id: '2'
+      author: 'Andrey Makhov'
+      context: init_insert_data
+      file: db/changelog/changeset/version/1/31.01.23/insert_data.sql
